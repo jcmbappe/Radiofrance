@@ -11,6 +11,9 @@ composeBom = "2024.02.01"
 jetbrainsKotlinJvm = "1.9.0"
 ksp = "1.9.0-1.0.13"
 hilt = "2.50"
+secret = "2.0.1"
+apolloGraphql3 = "3.8.2"
+apolloCoroutine = "2.5.14"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,11 +34,16 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
+apollo-graphql3 = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apolloGraphql3" }
+apollo-coroutine = { group = "com.apollographql.apollo", name = "apollo-coroutines-support", version.ref = "apolloCoroutine" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+android-secret = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secret" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+apollo-graphql = { id = "com.apollographql.apollo3", version.ref = "apolloGraphql3" }
 

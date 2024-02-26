@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.android.secret)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.apollo.graphql)
 }
 
 android {
@@ -12,6 +16,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -35,7 +43,20 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+
+    implementation(libs.apollo.graphql3)
+    implementation(libs.apollo.coroutine)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.mbappe.radiofrance")
+    }
 }
