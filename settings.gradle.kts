@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Radio France"
 include(":app")
- 
+include(":models")
