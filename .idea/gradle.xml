@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/datasource" />
+            <option value="$PROJECT_DIR$/data/repositories" />
             <option value="$PROJECT_DIR$/models" />
           </set>
         </option>

@@ -23,3 +23,4 @@ rootProject.name = "Radio France"
 include(":app")
 include(":models")
 include(":data:datasource")
+include(":data:repositories")
