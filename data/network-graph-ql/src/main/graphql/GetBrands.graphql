@@ -1,0 +1,8 @@
+query GetBrands {
+    brands {
+        id
+        title
+        baseline
+        description
+    }
+}
