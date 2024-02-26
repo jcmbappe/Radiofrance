@@ -9,7 +9,9 @@ import com.mbappe.network_graph_ql.toBrand
 import com.mbappe.radiofrance.GetBrandsQuery
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class BrandNetworkDataSource @Inject constructor(
     private val client: ApolloClient
 ) : BrandDataSource {

@@ -2,6 +2,8 @@ package com.mbappe.network_graph_ql.di
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
+import com.mbappe.datasource.BrandDataSource
+import com.mbappe.network_graph_ql.datasource.BrandNetworkDataSource
 import com.mbappe.network_graph_ql.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -23,4 +25,7 @@ object Network {
         )
         .build()
 
+    @Provides
+    fun providesBrandsDataSource(brandNetworkDataSource: BrandNetworkDataSource): BrandDataSource =
+        brandNetworkDataSource
 }

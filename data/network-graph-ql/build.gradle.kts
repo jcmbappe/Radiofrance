@@ -42,6 +42,10 @@ android {
 
 dependencies {
 
+    implementation(project(":data:datasource"))
+    implementation(project(":models"))
+    implementation(project(":common"))
+
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.dagger.hilt)

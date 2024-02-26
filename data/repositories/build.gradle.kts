@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -33,6 +35,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
+    implementation(project(":models"))
+    implementation(project(":data:network-graph-ql"))
+    implementation(project(":data:datasource"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+
 }
