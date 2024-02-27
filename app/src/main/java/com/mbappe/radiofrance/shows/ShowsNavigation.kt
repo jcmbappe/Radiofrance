@@ -26,14 +26,14 @@ fun showsScreenNavigationRoute(stationId: String) = "shows/$stationId"
 
 fun NavController.navigateToShow(stationId: String) {
     val encodedId = URLEncoder.encode(stationId, URL_CHARACTER_ENCODING)
-    navigate("topic_route/$encodedId") {
+    navigate(showsScreenNavigationRoute(stationId = encodedId)) {
         launchSingleTop = true
     }
 }
 
-fun NavGraphBuilder.showsScreen(stationId: String) {
+fun NavGraphBuilder.showsScreen() {
     composable(
-        route = showsScreenNavigationRoute(stationId = stationId),
+        route = showsScreenNavigationRoute(stationId = "{$STATION_ID_ARG}"),
         arguments = listOf(
             navArgument(STATION_ID_ARG) { type = NavType.StringType },
         )

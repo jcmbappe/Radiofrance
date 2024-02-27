@@ -18,6 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mbappe.common.ApiResponse
 import com.mbappe.models.Brand
+import com.mbappe.radiofrance.shows.navigateToShow
+import com.mbappe.radiofrance.shows.showsScreen
 import com.mbappe.radiofrance.stations.stationsScreen
 import com.mbappe.radiofrance.stations.stationsScreenNavigationRoute
 import com.mbappe.radiofrance.ui.theme.RadioFranceTheme
@@ -46,7 +48,8 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = stationsScreenNavigationRoute()
                     ) {
-                        stationsScreen()
+                        stationsScreen(navController::navigateToShow)
+                        showsScreen()
                     }
                 }
             }

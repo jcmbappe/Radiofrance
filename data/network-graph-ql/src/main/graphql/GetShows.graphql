@@ -1,0 +1,11 @@
+query GetShows($stationId: StationsEnum!, $showPerPage: Int, $after: String){
+    shows(station: $stationId, first: $showPerPage, after: $after) {
+        edges {
+            cursor
+            node {
+                id
+                title
+            }
+        }
+    }
+}

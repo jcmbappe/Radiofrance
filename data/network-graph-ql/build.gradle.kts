@@ -47,11 +47,9 @@ dependencies {
     implementation(project(":common"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.paging)
 
     implementation(libs.dagger.hilt)
-    implementation(project(":data:datasource"))
-    implementation(project(":models"))
-    implementation(project(":common"))
     ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.apollo.graphql3)
