@@ -24,7 +24,7 @@ internal fun ShowsRoute(
     modifier: Modifier = Modifier,
     showViewModel: ShowsViewModel = hiltViewModel(),
 ) {
-    val showsPagingItems: LazyPagingItems<Show> = showViewModel.flow.collectAsLazyPagingItems()
+    val showsPagingItems: LazyPagingItems<Show> = showViewModel.pagingShowsFlow.collectAsLazyPagingItems()
 
     stationsScreen(
         showsPagingItems = showsPagingItems,

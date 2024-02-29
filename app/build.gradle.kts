@@ -74,6 +74,7 @@ dependencies {
 
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation)
+    implementation(project(":domaine:usecase"))
     ksp(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)
