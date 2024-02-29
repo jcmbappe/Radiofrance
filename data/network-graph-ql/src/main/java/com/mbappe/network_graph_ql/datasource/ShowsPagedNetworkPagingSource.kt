@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
+import com.mbappe.common.PrependError
 import com.mbappe.models.Show
 import com.mbappe.network_graph_ql.mapToLoadResult
 import com.mbappe.network_graph_ql.toShow
@@ -26,7 +27,7 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
         }
 
         if (params is LoadParams.Prepend) {
-            return LoadResult.Error(Error("No prepend available"))
+            return LoadResult.Error(PrependError())
         }
 
         val key = if (params is LoadParams.Append) params.key else null
