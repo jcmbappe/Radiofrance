@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShowsRepository {
 
-    suspend fun getShows(stationId: String, pageSize: Int): Flow<PagingData<Show>>
+     fun getShows(stationId: String, pageSize: Int): Flow<PagingData<Show>>
 }

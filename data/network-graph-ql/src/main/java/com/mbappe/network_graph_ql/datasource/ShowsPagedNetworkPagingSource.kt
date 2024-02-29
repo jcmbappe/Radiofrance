@@ -25,36 +25,44 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
             return LoadResult.Error(Error("Wrong station ID"))
         }
 
-        return client.query(
-            GetShowsQuery(
-                stationId = stationEnumId,
-                showPerPage = Optional.present(params.loadSize),
-                after = Optional.presentIfNotNull(params.key)
+        if (params is LoadParams.Prepend) {
+            return LoadResult.Error(Error("No prepend available"))
+        }
+
+        val key = if (params is LoadParams.Append) params.key else null
+
+        return try {
+            client.query(
+                GetShowsQuery(
+                    stationId = stationEnumId,
+                    showPerPage = Optional.present(params.loadSize),
+                    after = Optional.presentIfNotNull(key)
+                )
+            ).execute().mapToLoadResult(
+                getPreviousKey = { data: GetShowsQuery.Data ->
+                    data.shows?.edges?.firstOrNull()?.cursor
+                },
+                getNextKey = { data: GetShowsQuery.Data ->
+                    data.shows?.edges?.lastOrNull()?.cursor
+                },
+                transformation = { data ->
+                    data.shows?.edges?.mapNotNull { edge ->
+                        edge?.node?.toShow()
+                    } ?: listOf()
+                }
             )
-        ).execute().mapToLoadResult(
-            getPreviousKey = { data: GetShowsQuery.Data ->
-                data.shows?.edges?.firstOrNull()?.cursor
-            },
-            getNextKey = { data: GetShowsQuery.Data ->
-                data.shows?.edges?.lastOrNull()?.cursor
-            },
-            transformation = { data ->
-                data.shows?.edges?.mapNotNull { edge ->
-                    edge?.node?.toShow()
-                } ?: listOf()
-            }
-        )
+
+        } catch (e: Throwable) {
+            LoadResult.Error(e)
+        }
     }
 
     override fun getRefreshKey(state: PagingState<String, Show>): String? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey
-        }
+        return null
     }
 
     @AssistedFactory
     interface Factory {
-        fun create(@Assisted stationId: String,) : ShowsPagedNetworkPagingSource
+        fun create(@Assisted stationId: String): ShowsPagedNetworkPagingSource
     }
 }
