@@ -36,7 +36,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
-    implementation(project(":models"))
+    implementation(project(":domain:models"))
     implementation(project(":data:network-graph-ql"))
     implementation(project(":data:datasource"))
 

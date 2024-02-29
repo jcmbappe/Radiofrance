@@ -53,9 +53,10 @@ android {
 
 dependencies {
 
+    implementation(project(":domain:usecase"))
+    implementation(project(":domain:models"))
     implementation(project(":data:repositories"))
     implementation(project(":common"))
-    implementation(project(":models"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -74,7 +75,6 @@ dependencies {
 
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation)
-    implementation(project(":domaine:usecase"))
     ksp(libs.dagger.hilt.compiler)
 
     testImplementation(libs.junit)

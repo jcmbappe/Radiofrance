@@ -43,7 +43,7 @@ android {
 dependencies {
 
     implementation(project(":data:datasource"))
-    implementation(project(":models"))
+    implementation(project(":domain:models"))
     implementation(project(":common"))
 
     implementation(libs.androidx.core.ktx)

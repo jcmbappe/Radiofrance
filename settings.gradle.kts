@@ -21,9 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Radio France"
 include(":app")
-include(":models")
+include(":domain:models")
+include(":domain:usecase")
 include(":data:datasource")
 include(":data:repositories")
 include(":data:network-graph-ql")
 include(":common")
-include(":domaine:usecase")
