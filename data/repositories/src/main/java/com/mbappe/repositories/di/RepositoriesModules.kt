@@ -1,8 +1,8 @@
 package com.mbappe.repositories.di
 
-import com.mbappe.repositories.BrandsRepository
+import com.mbappe.repositories.StationsRepository
 import com.mbappe.repositories.ShowsRepository
-import com.mbappe.repositories.implementation.BrandsRepositoryImpl
+import com.mbappe.repositories.implementation.StationsRepositoryImpl
 import com.mbappe.repositories.implementation.ShowsRepositoryImpl
 import dagger.Binds
 import dagger.Module
@@ -15,8 +15,8 @@ abstract class RepositoriesModules {
 
     @Binds
     internal abstract fun bindsBrandsRepository(
-        brandsRepositoryImpl: BrandsRepositoryImpl,
-    ): BrandsRepository
+        brandsRepositoryImpl: StationsRepositoryImpl,
+    ): StationsRepository
 
 
     @Binds

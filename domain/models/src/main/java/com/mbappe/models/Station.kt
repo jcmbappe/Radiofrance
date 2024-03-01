@@ -1,6 +1,6 @@
 package com.mbappe.models
 
-data class Brand(
+data class Station(
     val id: String,
     val title: String,
     val baseline: String?,

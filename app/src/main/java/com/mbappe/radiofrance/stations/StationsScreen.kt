@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mbappe.models.Brand
+import com.mbappe.models.Station
 
 @Composable
 internal fun StationsRoute(
@@ -33,7 +33,7 @@ internal fun StationsRoute(
 @Composable
 private fun stationsScreen(
     onStationClick: (stationId: String) -> Unit,
-    stationList: List<Brand>,
+    stationList: List<Station>,
     modifier: Modifier = Modifier
 ) {
     val state = rememberLazyListState()

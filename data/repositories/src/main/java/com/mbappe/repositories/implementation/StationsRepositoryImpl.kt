@@ -1,9 +1,9 @@
 package com.mbappe.repositories.implementation
 
 import com.mbappe.common.ApiResponse
-import com.mbappe.datasource.BrandDataSource
-import com.mbappe.models.Brand
-import com.mbappe.repositories.BrandsRepository
+import com.mbappe.datasource.StationDataSource
+import com.mbappe.models.Station
+import com.mbappe.repositories.StationsRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -11,12 +11,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BrandsRepositoryImpl @Inject constructor(
-    private val brandDataSource: BrandDataSource,
+class StationsRepositoryImpl @Inject constructor(
+    private val stationDataSource: StationDataSource,
     private val coroutineDispatcher: CoroutineDispatcher,
-) : BrandsRepository {
-    override suspend fun getBrands(): Flow<ApiResponse<List<Brand>>> =
+) : StationsRepository {
+    override suspend fun getStations(): Flow<ApiResponse<List<Station>>> =
         withContext(coroutineDispatcher) {
-            brandDataSource.getBrands()
+            stationDataSource.getBrands()
         }
 }

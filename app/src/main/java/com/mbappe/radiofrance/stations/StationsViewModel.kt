@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mbappe.common.ApiResponse
-import com.mbappe.models.Brand
-import com.mbappe.repositories.BrandsRepository
+import com.mbappe.models.Station
+import com.mbappe.repositories.StationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,19 +16,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StationsViewModel @Inject constructor(
-    private val repository: BrandsRepository
+    private val repository: StationsRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<List<Brand>>(listOf())
-    val state: StateFlow<List<Brand>> = _state
+    private val _state = MutableStateFlow<List<Station>>(listOf())
+    val state: StateFlow<List<Station>> = _state
 
     init {
-        getBrands()
+        getStations()
     }
 
-    private fun getBrands() {
+    private fun getStations() {
         viewModelScope.launch {
-            repository.getBrands()
+            repository.getStations()
                 .onEach { apiResponse ->
                     when (apiResponse) {
                         is ApiResponse.Error -> Log.d("JC", "Error ${apiResponse.message}")

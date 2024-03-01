@@ -15,7 +15,9 @@
             <option value="$PROJECT_DIR$/data/datasource" />
             <option value="$PROJECT_DIR$/data/network-graph-ql" />
             <option value="$PROJECT_DIR$/data/repositories" />
-            <option value="$PROJECT_DIR$/models" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/models" />
+            <option value="$PROJECT_DIR$/domain/usecase" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
