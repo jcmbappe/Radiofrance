@@ -2,6 +2,7 @@ package com.mbappe.radiofrance.ui.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.mbappe.models.Station
+import com.mbappe.models.StationAssets
 
 class StationPreviewParameterProvider : PreviewParameterProvider<Station> {
     private val station = Station(
@@ -9,8 +10,7 @@ class StationPreviewParameterProvider : PreviewParameterProvider<Station> {
         title = "France Inter",
         baseline = "Le direct de France Inter",
         description = "Joyeuse, savante et populaire, France Inter est la radio généraliste de service public ",
-        imageUrl = "https://www.radiofrance.fr/client/immutable/assets/franceinter-rect.ItYoXmb4.svg",
-        colorHex = 0xFFE20134
+        stationAssets = StationAssets.FranceInterAssets
     )
 
     override val values: Sequence<Station> = sequenceOf(

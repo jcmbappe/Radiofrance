@@ -31,7 +31,7 @@ fun stationRow(
 ) {
     val typography = MaterialTheme.typography
 
-    val imageHeight = 60.dp
+    val imageHeight = 80.dp
     val contentPadding = 20.dp
     Box(modifier = modifier) {
         Card(
@@ -71,15 +71,15 @@ fun stationRow(
             Box(modifier = Modifier.fillMaxWidth()
                 .height(10.dp)
                 .clip(RectangleShape)
-                .background(Color(station.colorHex))
+                .background(Color(station.stationAssets.colorHex))
 
             )
         }
         ImageAtom(
             modifier = Modifier.padding(start = contentPadding)
                 .clip(CardDefaults.shape),
-            size = DpSize(imageHeight * 2, imageHeight),
-            url = station.imageUrl
+            size = DpSize(imageHeight, imageHeight),
+            url = station.stationAssets.logoSquareUrl
         )
     }
 }

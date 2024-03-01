@@ -5,6 +5,5 @@ data class Station(
     val title: String,
     val baseline: String?,
     val description: String?,
-    val imageUrl: String,
-    val colorHex: Long
+    val stationAssets: StationAssets,
 )
