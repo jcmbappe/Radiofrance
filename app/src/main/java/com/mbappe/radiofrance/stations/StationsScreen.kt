@@ -1,8 +1,19 @@
+@file:OptIn(ExperimentalLayoutApi::class)
+
 package com.mbappe.radiofrance.stations
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.statusBarsIgnoringVisibility
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -12,9 +23,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mbappe.models.Station
+import com.mbappe.radiofrance.ui.component.stationsCardItems
 
 @Composable
 internal fun StationsRoute(
@@ -40,19 +53,23 @@ private fun stationsScreen(
 
     Box(modifier = modifier) {
         LazyColumn(
+            modifier = Modifier.padding(horizontal = 15.dp),
             state = state
         ) {
-            items(items = stationList) { station ->
-                Column(
-                    modifier = Modifier.clickable {
-                        onStationClick(station.id)
-                    }
-                ) {
-                    Text(text = station.title)
-                    station.baseline?.let { Text(text = it) }
-                    station.description?.let { Text(text = it) }
-                }
-                HorizontalDivider(color = Color.Black)
+            item {
+                Spacer(
+                    Modifier.windowInsetsTopHeight(
+                        WindowInsets.statusBars
+                    )
+                )
+            }
+            stationsCardItems(items = stationList, onStationClick = onStationClick)
+            item {
+                Spacer(
+                    Modifier.windowInsetsBottomHeight(
+                        WindowInsets.systemBars
+                    )
+                )
             }
         }
     }
