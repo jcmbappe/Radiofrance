@@ -55,6 +55,9 @@ dependencies {
     implementation(libs.apollo.graphql3)
     implementation(libs.apollo.coroutine)
 
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.svg)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

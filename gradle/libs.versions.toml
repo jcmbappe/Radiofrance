@@ -29,6 +29,9 @@ hiltNavigation = "1.2.0"
 apolloGraphql3 = "3.8.2"
 apolloCoroutine = "2.5.14"
 
+# Other
+coil = "2.6.0"
+
 [libraries]
 # Android X
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +66,11 @@ androidx-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-co
 # Apollo
 apollo-graphql3 = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apolloGraphql3" }
 apollo-coroutine = { group = "com.apollographql.apollo", name = "apollo-coroutines-support", version.ref = "apolloCoroutine" }
+
+# Coil
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
