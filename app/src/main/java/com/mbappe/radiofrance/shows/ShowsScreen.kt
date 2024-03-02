@@ -18,6 +18,8 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mbappe.models.Show
+import com.mbappe.models.StationAssets
+import com.mbappe.radiofrance.ui.component.showHeader
 
 @Composable
 internal fun ShowsRoute(
@@ -27,6 +29,7 @@ internal fun ShowsRoute(
     val showsPagingItems: LazyPagingItems<Show> = showViewModel.pagingShowsFlow.collectAsLazyPagingItems()
 
     stationsScreen(
+        stationAsset = showViewModel.stationAssets,
         showsPagingItems = showsPagingItems,
         modifier = modifier
     )
@@ -34,6 +37,7 @@ internal fun ShowsRoute(
 
 @Composable
 private fun stationsScreen(
+    stationAsset: StationAssets,
     showsPagingItems: LazyPagingItems<Show>,
     modifier: Modifier = Modifier
 ) {
@@ -51,6 +55,9 @@ private fun stationsScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                item {
+                    showHeader(imageRectangleUrl = stationAsset.logoRectangleUrl )
+                }
                 items(count = showsPagingItems.itemCount) { index ->
                     showsPagingItems[index]?.let { show ->
                         Text(index.toString(), fontSize = 20.sp)

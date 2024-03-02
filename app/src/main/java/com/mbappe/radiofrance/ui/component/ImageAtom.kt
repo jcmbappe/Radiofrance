@@ -27,7 +27,7 @@ import com.mbappe.radiofrance.R
 @Composable
 fun ImageAtom(
     modifier: Modifier = Modifier,
-    size: DpSize,
+    size: DpSize?,
     url: String?,
 ) {
     var isLoading by remember { mutableStateOf(true) }
@@ -39,8 +39,15 @@ fun ImageAtom(
             isError = state is AsyncImagePainter.State.Error
         },
     )
+
+    var boxModifier =
+        if (size != null)
+            modifier.size(size)
+        else
+            modifier
+
     Box(
-        modifier = modifier.size(size),
+        modifier = boxModifier,
         contentAlignment = Alignment.Center,
     ) {
         if (isLoading) {
