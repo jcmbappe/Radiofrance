@@ -5,10 +5,12 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,29 +46,40 @@ fun ShowCardMolecule(
         Column(
             modifier = Modifier.padding(
                 top = imageSize / 2 + 10.dp,
-                start = imageStartPadding,
-                end = imageStartPadding,
                 bottom = 15.dp
             )
         ) {
             TitleMediumAtom(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = imageStartPadding,
+                        end = imageStartPadding,
+                    ),
                 text = show.title
             )
             if (sortedThemes.isNotEmpty()) {
-                Row(
+                LazyRow(
                     modifier = Modifier
-                        .padding(top = 10.dp)
-                        .horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        .padding(top = 10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    contentPadding = PaddingValues(
+                        start = imageStartPadding,
+                        end = imageStartPadding,
+                    )
                 ) {
-                    for (themes in sortedThemes) {
-                        TagAtom(text = themes.title, color = stationColor)
+                    items(sortedThemes) { theme ->
+                        TagAtom(text = theme.title, color = stationColor)
                     }
                 }
             }
             if (show.podcasts.isNotEmpty()) {
-                Column(Modifier.background(MaterialTheme.colorScheme.surfaceVariant)) {
+                Column(
+                    Modifier.padding(
+                        start = imageStartPadding,
+                        end = imageStartPadding,
+                    )
+                ) {
                     Box(
                         modifier = Modifier
                             .clip(RectangleShape)
