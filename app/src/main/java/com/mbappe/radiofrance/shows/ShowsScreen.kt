@@ -19,7 +19,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mbappe.models.Show
 import com.mbappe.models.StationAssets
-import com.mbappe.radiofrance.ui.component.showHeader
+import com.mbappe.radiofrance.ui.component.molecules.ShowHeaderMolecule
 
 @Composable
 internal fun ShowsRoute(
@@ -56,7 +56,7 @@ private fun stationsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
-                    showHeader(imageRectangleUrl = stationAsset.logoRectangleUrl )
+                    ShowHeaderMolecule(imageRectangleUrl = stationAsset.logoRectangleUrl )
                 }
                 items(count = showsPagingItems.itemCount) { index ->
                     showsPagingItems[index]?.let { show ->

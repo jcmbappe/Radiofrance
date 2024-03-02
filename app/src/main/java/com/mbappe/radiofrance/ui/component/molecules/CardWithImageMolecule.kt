@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.mbappe.radiofrance.ui.component.ImageAtom
+import com.mbappe.radiofrance.ui.component.atoms.ImageAtom
 
 @Composable
 fun CardWithImageMolecule(

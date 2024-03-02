@@ -1,16 +1,16 @@
-package com.mbappe.radiofrance.ui.component
+package com.mbappe.radiofrance.ui.component.atoms
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.mbappe.radiofrance.ui.theme.StationTextStyle
 
 @Composable
-fun stationNameAtom(modifier: Modifier = Modifier, text: String) {
+fun TitleMediumAtom(modifier: Modifier = Modifier, text: String) {
     Text(
         text = text,
-        style = StationTextStyle,
+        style = MaterialTheme.typography.titleMedium,
         modifier = modifier
     )
 }
@@ -18,5 +18,5 @@ fun stationNameAtom(modifier: Modifier = Modifier, text: String) {
 @Composable
 @Preview
 private fun preview() {
-    stationNameAtom(text = "France Inter")
+    TitleMediumAtom(text = "France Inter")
 }

@@ -1,4 +1,4 @@
-package com.mbappe.radiofrance.ui.component
+package com.mbappe.radiofrance.ui.component.atoms
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

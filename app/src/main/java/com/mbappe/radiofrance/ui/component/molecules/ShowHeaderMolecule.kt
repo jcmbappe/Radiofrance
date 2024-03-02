@@ -1,4 +1,4 @@
-package com.mbappe.radiofrance.ui.component
+package com.mbappe.radiofrance.ui.component.molecules
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mbappe.radiofrance.ui.component.atoms.ImageAtom
 
 @Composable
-fun showHeader(
+fun ShowHeaderMolecule(
     imageRectangleUrl: String,
     modifier: Modifier = Modifier
 ) {
@@ -40,10 +40,4 @@ fun showHeader(
                 .align(Alignment.BottomCenter)
         )
     }
-}
-
-@Preview
-@Composable
-private fun preview() {
-
 }

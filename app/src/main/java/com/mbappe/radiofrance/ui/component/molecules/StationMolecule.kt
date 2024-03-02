@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.mbappe.models.Station
-import com.mbappe.radiofrance.ui.component.stationNameAtom
+import com.mbappe.radiofrance.ui.component.atoms.TitleMediumAtom
 import com.mbappe.radiofrance.ui.preview.StationPreviewParameterProvider
 
 @Composable
@@ -39,7 +39,7 @@ fun StationMolecule(
                 bottom = 15.dp
             )
         ) {
-            stationNameAtom(text = station.title)
+            TitleMediumAtom(text = station.title)
             if (!station.baseline.isNullOrEmpty()) {
                 station.baseline?.let {
                     Text(
