@@ -29,8 +29,10 @@ fun StationMolecule(
     val typography = MaterialTheme.typography
 
     CardWithImageMolecule(
+        modifier = modifier,
         imageSquareUrl = station.stationAssets.logoSquareUrl,
-        onCardClick = { onStationClick(station.id) }) { imageSize, imageStartPadding ->
+        onCardClick = { onStationClick(station.id) }
+    ) { imageSize, imageStartPadding ->
         Column(
             modifier = Modifier.padding(
                 top = imageSize / 2 + 10.dp,

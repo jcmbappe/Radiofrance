@@ -18,6 +18,6 @@ class PaginatedShowsInteractor @Inject constructor(
         .cachedIn(scope + coroutineDispatcher)
 
     companion object {
-        private const val SHOWS_PAGE_SIZE = 30
+        private const val SHOWS_PAGE_SIZE = 10
     }
 }

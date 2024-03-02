@@ -5,6 +5,29 @@ query GetShows($stationId: StationsEnum!, $showPerPage: Int, $after: String){
             node {
                 id
                 title
+                url
+                diffusionsConnection {
+                    edges {
+                        node {
+                            title
+                            personalitiesConnection {
+                                edges {
+                                    node {
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                taxonomiesConnection {
+                    edges {
+                        relation
+                        node {
+                            title
+                        }
+                    }
+                }
             }
         }
     }

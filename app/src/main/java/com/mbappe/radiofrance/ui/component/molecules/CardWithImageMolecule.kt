@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -30,7 +31,7 @@ fun CardWithImageMolecule(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = imageHeight / 2)
-                .wrapContentSize(),
+                .wrapContentHeight(),
             onClick = onCardClick,
         ) {
             content(imageHeight, contentPadding)

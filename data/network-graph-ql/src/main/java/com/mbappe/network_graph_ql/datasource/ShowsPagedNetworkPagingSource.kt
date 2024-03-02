@@ -1,5 +1,6 @@
 package com.mbappe.network_graph_ql.datasource
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.apollographql.apollo3.ApolloClient
@@ -47,6 +48,7 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
                     data.shows?.edges?.lastOrNull()?.cursor
                 },
                 transformation = { data ->
+                    Log.d("JC", "Count : ${data.shows?.edges?.size}")
                     data.shows?.edges?.mapNotNull { edge ->
                         edge?.node?.toShow()
                     } ?: listOf()
