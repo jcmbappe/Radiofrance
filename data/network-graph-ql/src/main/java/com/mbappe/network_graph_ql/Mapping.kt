@@ -7,21 +7,21 @@ import com.mbappe.radiofrance.GetBrandsQuery
 import com.mbappe.radiofrance.GetShowsQuery
 import com.mbappe.radiofrance.type.StationsEnum
 
-fun GetBrandsQuery.Brand.toBrand() = Station(
+internal fun GetBrandsQuery.Brand.toBrand() = Station(
     id = id,
     title = title,
     baseline = baseline,
     description = description,
-    stationAssets = getAssets(id),
+    stationAssets = getAssetsByStationId(id),
 )
 
 
-fun GetShowsQuery.Node.toShow() = Show(
+internal fun GetShowsQuery.Node.toShow() = Show(
     id = id,
     title = title,
 )
 
-private fun getAssets(id: String): StationAssets = when (id) {
+fun getAssetsByStationId(id: String): StationAssets = when (id) {
     StationsEnum.FRANCEINTER.name -> StationAssets.FranceInterAssets
     StationsEnum.FRANCEINFO.name -> StationAssets.FranceInfoAssets
     StationsEnum.FRANCEMUSIQUE.name -> StationAssets.FranceMusiqueAssets

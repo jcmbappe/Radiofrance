@@ -3,6 +3,8 @@ package com.mbappe.repositories.implementation
 import com.mbappe.common.ApiResponse
 import com.mbappe.datasource.StationDataSource
 import com.mbappe.models.Station
+import com.mbappe.models.StationAssets
+import com.mbappe.network_graph_ql.getAssetsByStationId
 import com.mbappe.repositories.StationsRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -19,4 +21,6 @@ class StationsRepositoryImpl @Inject constructor(
         withContext(coroutineDispatcher) {
             stationDataSource.getBrands()
         }
+
+    override fun getStationAssets(stationId: String): StationAssets = getAssetsByStationId(stationId)
 }
