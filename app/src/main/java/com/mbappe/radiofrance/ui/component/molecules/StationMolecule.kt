@@ -73,7 +73,7 @@ fun StationMolecule(
 
 @Preview
 @Composable
-private fun preview(
+private fun Preview(
     @PreviewParameter(StationPreviewParameterProvider::class) station: Station
 ) {
     StationMolecule(station = station) {}

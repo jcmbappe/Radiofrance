@@ -3,12 +3,9 @@ package com.mbappe.radiofrance.ui.component.organisms
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.mbappe.models.Show
 import com.mbappe.radiofrance.ui.component.molecules.ShowCardMolecule

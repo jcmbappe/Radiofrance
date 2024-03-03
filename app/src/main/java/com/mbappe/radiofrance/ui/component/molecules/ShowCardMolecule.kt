@@ -1,7 +1,6 @@
 package com.mbappe.radiofrance.ui.component.molecules
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -130,7 +128,7 @@ fun ShowCardMolecule(
 
 @Preview
 @Composable
-private fun preview(
+private fun Preview(
     @PreviewParameter(ShowPreviewParameterProvider::class) show: Show
 ) {
     RadioFranceTheme {

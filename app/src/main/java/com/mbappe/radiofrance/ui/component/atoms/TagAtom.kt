@@ -35,7 +35,7 @@ fun TagAtom(
 
 @Preview
 @Composable
-private fun preview() {
+private fun Preview() {
     RadioFranceTheme {
         TagAtom(text = "Musique Classique", color = Color.Green)
     }
