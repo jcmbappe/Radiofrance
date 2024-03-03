@@ -1,9 +1,9 @@
 package com.mbappe.radiofrance.stations
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mbappe.common.ApiResponse
+import com.mbappe.common.UiState
 import com.mbappe.models.Station
 import com.mbappe.repositories.StationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,8 @@ class StationsViewModel @Inject constructor(
     private val repository: StationsRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<List<Station>>(listOf())
-    val state: StateFlow<List<Station>> = _state
+    private val _state = MutableStateFlow<UiState<List<Station>>>(UiState.Loading)
+    val state: StateFlow<UiState<List<Station>>> = _state
 
     init {
         getStations()
@@ -31,9 +31,14 @@ class StationsViewModel @Inject constructor(
             repository.getStations()
                 .onEach { apiResponse ->
                     when (apiResponse) {
-                        is ApiResponse.Error -> Log.d("JC", "Error ${apiResponse.message}")
-                        is ApiResponse.Success -> apiResponse.data?.let { _state.emit(it) }
-                    }
+                        is ApiResponse.Error -> UiState.Error(
+                            apiResponse.message ?: "Unknown error occurred"
+                        )
+
+                        is ApiResponse.Success -> UiState.Success(
+                            apiResponse.data ?: emptyList<Station>()
+                        )
+                    }.let { _state.emit(it) }
                 }.launchIn(this)
         }
     }

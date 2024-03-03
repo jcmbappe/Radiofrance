@@ -18,6 +18,8 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mbappe.models.Show
 import com.mbappe.models.StationAssets
+import com.mbappe.radiofrance.emptyStates
+import com.mbappe.radiofrance.errorStates
 import com.mbappe.radiofrance.ui.component.atoms.LoaderAtom
 import com.mbappe.radiofrance.ui.component.molecules.ShowHeaderMolecule
 import com.mbappe.radiofrance.ui.component.organisms.showCardItems
@@ -62,22 +64,34 @@ private fun stationsScreen(
                     rawRes = stationAsset.loadingRes
                 )
             }
-        } else {
-            showCardItems(
-                modifier = Modifier.padding(horizontal = 15.dp),
-                showsPagingItems = showsPagingItems,
-                stationColor = Color(stationAsset.colorHex)
-            )
-
+        } else if (showsPagingItems.loadState.append is LoadState.Error) {
             item {
-                if (showsPagingItems.loadState.append is LoadState.Loading) {
-                    CircularProgressIndicator()
+                Box {
+                    val error = showsPagingItems.loadState.append as LoadState.Error
+                    errorStates(errorMessage = error.error.message)
+                }
+            }
+        } else {
+            if (showsPagingItems.itemSnapshotList.isNullOrEmpty()) {
+                item {
+                    Box {
+                        emptyStates()
+                    }
+                }
+            } else {
+                showCardItems(
+                    modifier = Modifier.padding(horizontal = 15.dp),
+                    showsPagingItems = showsPagingItems,
+                    stationColor = Color(stationAsset.colorHex)
+                )
+
+                item {
+                    if (showsPagingItems.loadState.append is LoadState.Loading) {
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }
-    }
-
-    Box(modifier = modifier.fillMaxSize()) {
     }
 }
 
