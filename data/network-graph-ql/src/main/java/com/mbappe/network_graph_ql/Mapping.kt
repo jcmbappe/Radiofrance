@@ -6,6 +6,14 @@ import com.mbappe.models.Show
 import com.mbappe.models.Station
 import com.mbappe.models.StationAssets
 import com.mbappe.models.Theme
+import com.mbappe.network_graph_ql.mocked.FipAssets
+import com.mbappe.network_graph_ql.mocked.FranceBleuAssets
+import com.mbappe.network_graph_ql.mocked.FranceCultureAssets
+import com.mbappe.network_graph_ql.mocked.FranceInfoAssets
+import com.mbappe.network_graph_ql.mocked.FranceInterAssets
+import com.mbappe.network_graph_ql.mocked.FranceMusiqueAssets
+import com.mbappe.network_graph_ql.mocked.MouvAssets
+import com.mbappe.network_graph_ql.mocked.UnknownAssets
 import com.mbappe.radiofrance.GetBrandsQuery
 import com.mbappe.radiofrance.GetShowsQuery
 import com.mbappe.radiofrance.type.StationsEnum
@@ -23,7 +31,7 @@ internal fun GetShowsQuery.Node.toShow() = Show(
     id = id,
     title = title,
     url = url.orEmpty(),
-    imageSquareUrl = "",
+    imageSquareUrl = "https://picsum.photos/seed/$id/400",
     podcasts = diffusionsConnection?.toList() ?: listOf(),
     themes = taxonomiesConnection?.toList() ?: listOf()
 )
@@ -67,12 +75,12 @@ internal fun GetShowsQuery.Edge3.toThemeRelation() = when (relation) {
 }
 
 fun getAssetsByStationId(id: String): StationAssets = when (id) {
-    StationsEnum.FRANCEINTER.name -> StationAssets.FranceInterAssets
-    StationsEnum.FRANCEINFO.name -> StationAssets.FranceInfoAssets
-    StationsEnum.FRANCEMUSIQUE.name -> StationAssets.FranceMusiqueAssets
-    StationsEnum.FRANCECULTURE.name -> StationAssets.FranceCultureAssets
-    StationsEnum.MOUV.name -> StationAssets.MouvAssets
-    StationsEnum.FIP.name -> StationAssets.FipAssets
-    StationsEnum.FRANCEBLEU.name -> StationAssets.FranceBleuAssets
-    else -> StationAssets.UnknownAssets
+    StationsEnum.FRANCEINTER.name -> FranceInterAssets
+    StationsEnum.FRANCEINFO.name -> FranceInfoAssets
+    StationsEnum.FRANCEMUSIQUE.name -> FranceMusiqueAssets
+    StationsEnum.FRANCECULTURE.name -> FranceCultureAssets
+    StationsEnum.MOUV.name -> MouvAssets
+    StationsEnum.FIP.name -> FipAssets
+    StationsEnum.FRANCEBLEU.name -> FranceBleuAssets
+    else -> UnknownAssets
 }

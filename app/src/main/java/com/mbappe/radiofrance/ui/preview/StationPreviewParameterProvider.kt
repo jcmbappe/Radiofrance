@@ -10,7 +10,10 @@ class StationPreviewParameterProvider : PreviewParameterProvider<Station> {
         title = "France Inter",
         baseline = "Le direct de France Inter",
         description = "Joyeuse, savante et populaire, France Inter est la radio généraliste de service public ",
-        stationAssets = StationAssets.FranceInterAssets
+        stationAssets = StationAssets(
+            logoSquareUrl = "", logoRectangleUrl = "", colorHex = 0xFFFF0000, loadingRes = 0
+
+        )
     )
 
     override val values: Sequence<Station> = sequenceOf(

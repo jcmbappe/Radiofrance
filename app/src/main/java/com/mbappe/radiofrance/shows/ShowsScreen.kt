@@ -2,9 +2,7 @@ package com.mbappe.radiofrance.shows
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -20,6 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mbappe.models.Show
 import com.mbappe.models.StationAssets
+import com.mbappe.radiofrance.ui.component.atoms.LoaderAtom
 import com.mbappe.radiofrance.ui.component.molecules.ShowHeaderMolecule
 import com.mbappe.radiofrance.ui.component.organisms.showCardItems
 
@@ -58,10 +57,9 @@ private fun stationsScreen(
         }
         if (showsPagingItems.loadState.refresh is LoadState.Loading) {
             item {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1.5f)
+                LoaderAtom(
+                    modifier = Modifier.fillParentMaxWidth(),
+                    rawRes = stationAsset.loadingRes
                 )
             }
         } else {
@@ -82,3 +80,4 @@ private fun stationsScreen(
     Box(modifier = modifier.fillMaxSize()) {
     }
 }
+
