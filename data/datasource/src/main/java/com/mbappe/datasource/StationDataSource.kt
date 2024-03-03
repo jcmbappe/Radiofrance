@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface StationDataSource {
 
-    fun getBrands() : Flow<ApiResponse<List<Station>>>
+    suspend fun getBrands() : Flow<ApiResponse<List<Station>>>
 }

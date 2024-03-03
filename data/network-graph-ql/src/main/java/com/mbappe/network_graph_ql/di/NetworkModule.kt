@@ -6,9 +6,10 @@ import coil.decode.SvgDecoder
 import coil.util.DebugLogger
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpCallFactory
-import com.apollographql.apollo3.network.okHttpClient
 import com.mbappe.datasource.StationDataSource
 import com.mbappe.network_graph_ql.BuildConfig
+import com.mbappe.network_graph_ql.connectivity.ConnectivityObserver
+import com.mbappe.network_graph_ql.connectivity.NetworkConnectivityObserver
 import com.mbappe.network_graph_ql.datasource.StationNetworkDataSource
 import com.mbappe.network_graph_ql.interceptor.AuthInterceptor
 import dagger.Module
@@ -22,7 +23,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object Network {
+object NetworkModule {
     @Provides
     @Singleton
     fun okHttpCallFactory(): Call.Factory = OkHttpClient.Builder()
@@ -58,4 +59,8 @@ object Network {
     @Provides
     fun providesStationDataSource(stationNetworkDataSource: StationNetworkDataSource): StationDataSource =
         stationNetworkDataSource
+
+    @Provides
+    fun providesConnectivityObserver(networkConnectivityObserver: NetworkConnectivityObserver) : ConnectivityObserver =
+        networkConnectivityObserver
 }

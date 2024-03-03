@@ -7,6 +7,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.mbappe.common.PrependError
 import com.mbappe.models.Show
+import com.mbappe.network_graph_ql.connectivity.ConnectivityObserver
 import com.mbappe.network_graph_ql.mapToLoadResult
 import com.mbappe.network_graph_ql.toShow
 import com.mbappe.radiofrance.GetShowsQuery
@@ -15,6 +16,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.withContext
 
 class ShowsPagedNetworkPagingSource @AssistedInject constructor(
@@ -37,6 +39,9 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
         val key = if (params is LoadParams.Append) params.key else null
 
         return try {
+            // TODO : Manage connectivity for paging
+            // ApolloClient fail if no network
+
             withContext(coroutineDispatcher) {
                 client.query(
                     GetShowsQuery(
@@ -52,7 +57,6 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
                         data.shows?.edges?.lastOrNull()?.cursor
                     },
                     transformation = { data ->
-                        Log.d("JC", "Count : ${data.shows?.edges?.size}")
                         data.shows?.edges?.mapNotNull { edge ->
                             edge?.node?.toShow()
                         } ?: listOf()
