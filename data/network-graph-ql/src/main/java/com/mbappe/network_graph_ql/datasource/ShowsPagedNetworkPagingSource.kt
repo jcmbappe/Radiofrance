@@ -14,9 +14,12 @@ import com.mbappe.radiofrance.type.StationsEnum
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class ShowsPagedNetworkPagingSource @AssistedInject constructor(
     @Assisted private val stationId: String,
+    private val coroutineDispatcher: CoroutineDispatcher,
     private val client: ApolloClient
 ) : PagingSource<String, Show>() {
 
@@ -34,27 +37,29 @@ class ShowsPagedNetworkPagingSource @AssistedInject constructor(
         val key = if (params is LoadParams.Append) params.key else null
 
         return try {
-            client.query(
-                GetShowsQuery(
-                    stationId = stationEnumId,
-                    showPerPage = Optional.present(params.loadSize),
-                    after = Optional.presentIfNotNull(key)
+            withContext(coroutineDispatcher) {
+                client.query(
+                    GetShowsQuery(
+                        stationId = stationEnumId,
+                        showPerPage = Optional.present(params.loadSize),
+                        after = Optional.presentIfNotNull(key)
+                    )
+                ).execute().mapToLoadResult(
+                    getPreviousKey = { data: GetShowsQuery.Data ->
+                        data.shows?.edges?.firstOrNull()?.cursor
+                    },
+                    getNextKey = { data: GetShowsQuery.Data ->
+                        data.shows?.edges?.lastOrNull()?.cursor
+                    },
+                    transformation = { data ->
+                        Log.d("JC", "Count : ${data.shows?.edges?.size}")
+                        data.shows?.edges?.mapNotNull { edge ->
+                            edge?.node?.toShow()
+                        } ?: listOf()
+                    }
                 )
-            ).execute().mapToLoadResult(
-                getPreviousKey = { data: GetShowsQuery.Data ->
-                    data.shows?.edges?.firstOrNull()?.cursor
-                },
-                getNextKey = { data: GetShowsQuery.Data ->
-                    data.shows?.edges?.lastOrNull()?.cursor
-                },
-                transformation = { data ->
-                    Log.d("JC", "Count : ${data.shows?.edges?.size}")
-                    data.shows?.edges?.mapNotNull { edge ->
-                        edge?.node?.toShow()
-                    } ?: listOf()
-                }
-            )
 
+            }
         } catch (e: Throwable) {
             LoadResult.Error(e)
         }

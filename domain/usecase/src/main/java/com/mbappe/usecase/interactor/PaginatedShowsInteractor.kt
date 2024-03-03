@@ -10,12 +10,11 @@ import javax.inject.Inject
 
 class PaginatedShowsInteractor @Inject constructor(
     private val showsRepository: ShowsRepository,
-    private val coroutineDispatcher: CoroutineDispatcher,
 ) : PaginatedShowsUseCase {
 
     override fun getFlow(stationId: String, scope: CoroutineScope) = showsRepository
         .getShows(stationId = stationId, SHOWS_PAGE_SIZE)
-        .cachedIn(scope + coroutineDispatcher)
+        .cachedIn(scope)
 
     companion object {
         private const val SHOWS_PAGE_SIZE = 10
