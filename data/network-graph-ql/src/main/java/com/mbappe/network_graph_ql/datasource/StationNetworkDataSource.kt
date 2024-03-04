@@ -30,6 +30,7 @@ class StationNetworkDataSource @Inject constructor(
 
         return try {
             withContext(coroutineDispatcher) {
+                // Apollo crash if no internet
                 connectivityObserver.observe().flatMapLatest { status ->
                     when (status) {
                         ConnectivityObserver.Status.Available -> {
@@ -39,8 +40,10 @@ class StationNetworkDataSource @Inject constructor(
                                     data.brands?.mapNotNull { it?.toBrand() } ?: listOf()
                                 }
                         }
+                        ConnectivityObserver.Status.Unavailable ->
+                            flowOf(ApiResponse.Error(errorMessage = "Network Error"))
                         else -> {
-                            flowOf(ApiResponse.Error(errorMessage = "Error"))
+                            flow{}
                         }
                     }
                 }
@@ -51,7 +54,7 @@ class StationNetworkDataSource @Inject constructor(
             }
         } catch (e: Error) {
             flow {
-                emit(ApiResponse.Error(errorMessage = "Error"))
+                emit(ApiResponse.Error(errorMessage = e.message ?: "Error"))
             }
         }
     }

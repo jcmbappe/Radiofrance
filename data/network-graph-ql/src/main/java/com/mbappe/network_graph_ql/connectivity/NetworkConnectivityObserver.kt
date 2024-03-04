@@ -3,20 +3,20 @@ package com.mbappe.network_graph_ql.connectivity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import com.mbappe.network_graph_ql.connectivity.ConnectivityObserver
+import android.net.NetworkRequest
+import android.os.Build
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class NetworkConnectivityObserver @Inject constructor(
     @ApplicationContext private val context: Context
-): ConnectivityObserver {
+) : ConnectivityObserver {
 
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -45,10 +45,22 @@ class NetworkConnectivityObserver @Inject constructor(
                 }
             }
 
-            connectivityManager.registerDefaultNetworkCallback(callback)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connectivityManager.registerDefaultNetworkCallback(callback)
+            } else {
+                val networkChangeFilter = NetworkRequest.Builder().build()
+                connectivityManager.registerNetworkCallback(networkChangeFilter, callback)
+            }
             awaitClose {
                 connectivityManager.unregisterNetworkCallback(callback)
             }
-        }.distinctUntilChanged()
+        }.onStart {
+            if (connectivityManager.activeNetworkInfo?.isConnected == true) {
+                ConnectivityObserver.Status.Available
+            } else {
+                ConnectivityObserver.Status.Unavailable
+            }.let { emit(it) }
+        }
+            .distinctUntilChanged()
     }
 }
