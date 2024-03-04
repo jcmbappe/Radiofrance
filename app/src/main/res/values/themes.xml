@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.RadioFrance" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.RadioFrance" parent="android:Theme.Material.NoActionBar" />
+
+    <style name="Theme.RadioFrance.Splashscreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/radio_france_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.RadioFrance</item>
+    </style>
 </resources>
